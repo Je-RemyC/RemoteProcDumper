@@ -20,7 +20,9 @@ Param (
 
 )
 
-$username = "dc9cloud2\Administrator"$password = "H3lpd3sk!" | ConvertTo-SecureString -AsPlainText -Force$cred = New-Object -typename System.Management.Automation.PSCredential -argumentlist $username, $password
+$username = "Enter username"
+$password = "Enter password" | ConvertTo-SecureString -AsPlainText -Force
+$cred = New-Object -typename System.Management.Automation.PSCredential -argumentlist $username, $password
 
 
 # Invoke-Command takes the Remote Server, Process To Dump and the Object To Sort and returns a process ID 
@@ -47,11 +49,9 @@ $PSSession = New-PSSession -ComputerName $RemoteServer -Credential $cred
 
 Function MapNetworkDrive { 
 
-#$Password = Read-Host -Prompt 'Enter Password' -AsSecureString
-#$EnterPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password))
-#Net Use Q: "\\file-server\userdata\users\$env:username\downloads" /user:system\$env:username $EnterPassword
-
-Invoke-Command -Session $PSSession -ScriptBlock {Net Use Q: "\\192.168.2.50\Documents" /user:Administrator H3lpd3sk!}
+$Password = Read-Host -Prompt 'Enter Password' -AsSecureString
+$EnterPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password))
+Net Use Q: "\\file-server\userdata\users\$env:username\downloads" /user:system\$env:username $EnterPassword
 
 }
 
